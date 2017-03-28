@@ -1,0 +1,31 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo test",
+    "lint": "jshint --reporter=node_modules/jshint-stylish --exclude=js/bb-code-styles.css build/js/*; exit 0",
+    "prebuild": "npm run lint; npm run buildcss; npm run updateHtmlPhp;",
+    "build": "browserify build/js/main.js | uglifyjs > dist/scripts.min.js",
+    "buildcss": "cat build/css/* | postcss -u autoprefixer -o dist/styles.min.css",
+    "watch": "nodemon -e js,css,html,php -w build -x 'npm run build'",
+    "updateHtmlPhp": "cp build/index.html dist/index.html | true; cp build/index.php dist/index.php | true;"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.4.0",
+    "browserify": "^13.1.0",
+    "csslint": "^1.0.2",
+    "jshint": "^2.9.3",
+    "jshint-stylish": "^2.2.1",
+    "nodemon": "^1.10.2",
+    "phplint": "^1.7.1",
+    "postcss-cli": "^2.5.2",
+    "uglify-js": "^2.7.3"
+  },
+  "dependencies": {
+    "normalize.css": "^4.2.0"
+  }
+}
